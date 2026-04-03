@@ -10,6 +10,7 @@
             --accent: #e74c3c;
             --hotel: #2ecc71;
             --secret: #9b59b6;
+            --history: #64748b;
             --card: #ffffff;
             --text: #1e293b;
         }
@@ -19,13 +20,11 @@
             margin: 0;
             color: var(--text);
             line-height: 1.6;
-            
-            /* ACHTERGROND AFBEELDING INSTELLINGEN */
             background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
                               url('https://images.pexels.com/photos/17145797/pexels-photo-17145797.jpeg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Zorgt dat de foto blijft staan tijdens scrollen */
+            background-attachment: fixed;
             background-repeat: no-repeat;
         }
 
@@ -40,7 +39,6 @@
 
         .container { max-width: 850px; margin: -30px auto 40px; padding: 0 20px; }
 
-        /* Programma Overzicht */
         .overview-card {
             background: var(--water);
             color: white;
@@ -52,9 +50,8 @@
 
         .overview-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .overview-table td { padding: 10px 5px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
-        .time { font-weight: bold; color: #a5f3fc; width: 100px; }
+        .time { font-weight: bold; color: #a5f3fc; width: 110px; }
 
-        /* Kaart styling */
         .mini-map {
             width: 100%;
             height: 180px;
@@ -63,7 +60,6 @@
             margin-bottom: 20px;
         }
 
-        /* Activiteit Kaarten */
         .activity-card {
             background: var(--card);
             border-radius: 24px;
@@ -74,6 +70,7 @@
         }
 
         .hotel-card { border-top-color: var(--hotel); }
+        .history-card { border-top-color: var(--history); }
         .secret-card { border-top-color: var(--secret); background: #faf5ff; border: 2px dashed var(--secret); }
 
         .badge {
@@ -88,26 +85,15 @@
             display: inline-block;
         }
 
-        .details-list { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9rem; }
-        .details-list li { margin-bottom: 8px; display: flex; align-items: center; }
-        .details-list li span { margin-right: 10px; opacity: 0.7; }
-
         h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--water); }
         .description { font-size: 0.95rem; color: #475569; margin-bottom: 15px; }
 
-        /* Uitvouwknop & Gids Intel Styling */
         .guide-details {
             background: #f1f5f9;
             border-radius: 12px;
             margin-bottom: 20px;
             border-left: 4px solid #64748b;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .guide-details.secret-details {
-            background: #f3e8ff;
-            border-left-color: var(--secret);
         }
 
         .guide-summary {
@@ -115,27 +101,16 @@
             cursor: pointer;
             font-weight: bold;
             color: #334155;
-            list-style: none; /* Verbergt standaard pijl */
+            list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
         }
 
-        .guide-summary::-webkit-details-marker {
-            display: none; /* Verbergt pijl in Safari */
-        }
-
-        .guide-summary::after {
-            content: '▼';
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .guide-details[open] .guide-summary::after {
-            transform: rotate(180deg);
-        }
+        .guide-summary::after { content: '▼'; font-size: 0.7rem; transition: 0.3s; }
+        .guide-details[open] .guide-summary::after { transform: rotate(180deg); }
 
         .guide-intel-content {
             padding: 0 15px 15px 15px;
@@ -144,15 +119,7 @@
             line-height: 1.7;
         }
 
-        .guide-intel-content p { margin-top: 0; margin-bottom: 12px; }
-        .guide-intel-content p:last-child { margin-bottom: 0; }
-
-        /* Knoppen Styling */
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .maps-btn, .website-btn {
             display: inline-flex;
@@ -162,27 +129,10 @@
             border-radius: 10px;
             font-weight: 600;
             font-size: 0.85rem;
-            transition: all 0.2s ease;
         }
 
-        .maps-btn {
-            background: #4285F4;
-            color: white;
-            border: 2px solid #4285F4;
-        }
-
-        .maps-btn:hover { background: #2b6ce0; }
-
-        .website-btn {
-            background: transparent;
-            color: var(--water);
-            border: 2px solid var(--water);
-        }
-
-        .website-btn:hover {
-            background: var(--water);
-            color: white;
-        }
+        .maps-btn { background: #4285F4; color: white; border: 2px solid #4285F4; }
+        .website-btn { background: transparent; color: var(--water); border: 2px solid var(--water); }
 
         footer { text-align: center; padding: 40px; color: #1e293b; font-size: 0.8rem; font-weight: bold; }
     </style>
@@ -197,152 +147,93 @@
 <div class="container">
 
     <div class="overview-card">
-        <h2 style="margin-top:0">📅 Planning</h2>
+        <h2 style="margin-top:0">📅 Planning Vrijdag Focus</h2>
         <table class="overview-table">
-            <tr><td class="time">Donderdag</td><td>Aankomst, Inchecken & Speicherstadt Tour (15:00 - 20:00)</td></tr>
-            <tr><td class="time">Vrijdag</td><td>Altstadt, Rathaus & Bunkermuseum (10:00 - 17:30)</td></tr>
-            <tr><td class="time">Zaterdag</td><td>Havenrondvaart (11:00) & <strong>De Verrassing (21:00)</strong></td></tr>
-            <tr><td class="time">Zondag</td><td>Fischmarkt (06:00) & Schanzenviertel (11:00)</td></tr>
+            <tr><td class="time">Donderdag</td><td>Speicherstadt & Elphi Panorama</td></tr>
+            <tr><td class="time">Vrijdag 10:30</td><td>Rathaus & Altstadt Wandeling</td></tr>
+            <tr><td class="time">Vrijdag 13:30</td><td><b>Bunkermuseum Hamm (Ondergronds)</b></td></tr>
+            <tr><td class="time">Vrijdag 15:30</td><td><b>St. Nikolai (Kerk-monument & Lift)</b></td></tr>
+            <tr><td class="time">Zaterdag</td><td>Havenrondvaart & ✨ Verrassing</td></tr>
+            <tr><td class="time">Zondag</td><td>Fischmarkt & Schanzenviertel</td></tr>
         </table>
     </div>
 
-    <!-- HOTEL -->
+    <!-- HOTEL (Kort voor overzicht) -->
     <div class="activity-card hotel-card">
         <span class="badge" style="background: var(--hotel);">Homebase</span>
-        <h3>NYX Hotel Hamburg by Leonardo</h3>
-        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=10.018,53.544,10.028,53.548&layer=mapnik&marker=53.5461,10.0232"></iframe>
-        
-        <p class="description">Jullie verblijven in het levendige Hammerbrook district. Een urban-art hotel met alle luxe die nodig is voor deze trip.</p>
-        
-        <ul class="details-list">
-            <li><span>📍</span> Frankenstraße 16, 20097 Hamburg</li>
-            <li><span>📞</span> +49 40 605 338 600</li>
-            <li><span>📧</span> info.hamburg@nyx-hotels.com</li>
-            <li><span>🕒</span> Check-in: vanaf 15:00 | Check-out: tot 12:00</li>
-            <li><span>🥐</span> Ontbijt: Ma-Vr 06:30-10:30 | Za-Zo 07:00-11:00</li>
-            <li><span>📶</span> WiFi: NYX_Guest (geen wachtwoord nodig)</li>
-        </ul>
-
-        <details class="guide-details">
-            <summary class="guide-summary">🎙️ Tips van je Tourguide</summary>
-            <div class="guide-intel-content">
-                <p>Welkom in Hamburg! Zodra jullie voet zetten in het NYX Hotel, voel je direct de urban vibe die zo kenmerkend is voor deze stad. Dit is niet zomaar een slaapplek, het is een waar canvas van lokale street-art en modern design. De bedden hier zijn fantastisch, wat we zeker nodig gaan hebben na onze stevige ontdekkingstochten in de stad.</p>
-                <p>Mochten jullie wat aan de vroege kant zijn: geen enkel probleem. De bagage kan veilig in de 'Lockers' bij de receptie. Mijn absolute tip? Plof direct even neer bij de levendige hotelbar voor een eerste ijskoude pint of een goede kop koffie. De sfeer zet meteen de juiste toon voor het weekend!</p>
-            </div>
-        </details>
-
+        <h3>NYX Hotel Hamburg</h3>
+        <p class="description">Jullie verblijf in Hammerbrook. Luxe en art.</p>
         <div class="btn-group">
-            <a href="https://www.google.com/maps/search/?api=1&query=NYX+Hotel+Hamburg+Frankenstraße+16" target="_blank" class="maps-btn">📍 Navigeer</a>
-            <a href="https://www.leonardo-hotels.com/hamburg/nyx-hotel-hamburg" target="_blank" class="website-btn">🌐 Website Hotel</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=NYX+Hotel+Hamburg" target="_blank" class="maps-btn">📍 Navigeer</a>
         </div>
     </div>
 
-    <!-- SPEICHERSTADT -->
-    <div class="activity-card">
-        <span class="badge">Donderdag - 16:00</span>
-        <h3>Speicherstadt & Elphi</h3>
-        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.980,53.538,9.995,53.546&layer=mapnik&marker=53.5408,9.9842"></iframe>
-        <p class="description">Verkenning van het UNESCO-werelderfgoed en een bezoek aan de Plaza van de Elbphilharmonie voor een uitzicht over de hele haven.</p>
-        
-        <details class="guide-details">
-            <summary class="guide-summary">🎙️ Tips van je Tourguide</summary>
-            <div class="guide-intel-content">
-                <p>We trappen af met het absolute pronkstuk van de stad: de Speicherstadt. Dit is het grootste aaneengesloten pakhuizencomplex ter wereld, gebouwd op duizenden eikenhouten palen. Terwijl we over de karakteristieke grachten en sierlijke bruggetjes lopen, ruik je met een beetje verbeelding de specerijen, koffie en theebladeren die hier decennialang door stoere havenarbeiders werden gelost.</p>
-                <p>Daarna steken we door naar de machtige Elbphilharmonie. We pakken de beroemde roltrap ('The Tube') recht naar de Plaza. Deze roltrap rit duurt maar liefst 2,5 minuut, dus bereid je voor op een perfect moment voor een groepsfoto! Eenmaal boven worden we beloond met een adembenemend 360-graden panorama over de bedrijvige haven en de skyline van de stad.</p>
-            </div>
-        </details>
-
-        <div class="btn-group">
-            <a href="https://www.google.com/maps/search/?api=1&query=Elbphilharmonie+Hamburg" target="_blank" class="maps-btn">📍 Open Maps</a>
-            <a href="https://www.elbphilharmonie.de/en/plaza" target="_blank" class="website-btn">🌐 Info Elbphilharmonie</a>
-        </div>
-    </div>
-
-    <!-- ALTSTADT & BUNKER -->
+    <!-- VRIJDAG: RATHAUS -->
     <div class="activity-card">
         <span class="badge">Vrijdag - 10:30</span>
-        <h3>Altstadt & Historie</h3>
+        <h3>Rathaus & Alsterarkaden</h3>
         <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.988,53.548,10.005,53.555&layer=mapnik&marker=53.5502,9.9922"></iframe>
-        <p class="description">Een wandeling langs het indrukwekkende Rathaus en een bezoek aan het Bunkermuseum in Hamm voor een diepe duik in de geschiedenis.</p>
-        
+        <p class="description">Pracht en praal in het hart van de Altstadt.</p>
         <details class="guide-details">
             <summary class="guide-summary">🎙️ Tips van je Tourguide</summary>
             <div class="guide-intel-content">
-                <p>Vandaag duiken we het rijke verleden van deze hanzestad in. We beginnen in het hart van de Altstadt bij het imposante Hamburger Rathaus. Wist je dat dit indrukwekkende stadhuis maar liefst 647 kamers telt? Dat zijn er meer dan Buckingham Palace! De neo-renaissance architectuur zit vol waanzinnige details; vergeet vooral niet even de serene binnenplaats met zijn prachtige fontein in te lopen.</p>
-                <p>Rond de middag strijken we neer bij de elegante Alsterarkaden voor een lunch aan het water. Daarna pakken we een hele andere, indringende kant van de geschiedenis mee bij het Bunkermuseum in Hamm. Je daalt letterlijk af in een ondergrondse schuilkelder uit de Tweede Wereldoorlog. Het is een rauwe ervaring die de veerkracht van deze stad perfect in perspectief plaatst.</p>
+                <p>We beginnen de dag groots bij het Hamburger Rathaus. Dit gebouw straalt de rijkdom van de Hanzestad uit. Na het bewonderen van de gevel wandelen we naar de Alsterarkaden. Dit voelt bijna Venetiaans aan door de witte bogen en de zwanen in het water. Een perfecte plek voor een snelle lunch voordat we de rauwe geschiedenis induiken.</p>
             </div>
         </details>
-
         <div class="btn-group">
             <a href="https://www.google.com/maps/search/?api=1&query=Hamburger+Rathaus" target="_blank" class="maps-btn">📍 Open Maps</a>
-            <a href="https://www.bunkermuseum.de/" target="_blank" class="website-btn">🌐 Bunkermuseum</a>
         </div>
     </div>
 
-    <!-- HAVENRONDVAART -->
-    <div class="activity-card">
-        <span class="badge">Zaterdag - 11:00</span>
-        <h3>Havenrondvaart</h3>
-        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.965,53.542,9.975,53.548&layer=mapnik&marker=53.5458,9.9696"></iframe>
-        <p class="description">De ziel van Hamburg vanaf het water. We varen langs dokken, kranen en gigantische zeeschepen.</p>
-        
+    <!-- VRIJDAG: BUNKERMUSEUM (HAMM) -->
+    <div class="activity-card history-card">
+        <span class="badge">Vrijdag - 13:30</span>
+        <h3>Bunkermuseum Hamm</h3>
+        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=10.050,53.550,10.065,53.558&layer=mapnik&marker=53.5552,10.0575"></iframe>
+        <p class="description">Een authentieke ondergrondse schuilkelder die het verhaal van de oorlog vertelt.</p>
         <details class="guide-details">
             <summary class="guide-summary">🎙️ Tips van je Tourguide</summary>
             <div class="guide-intel-content">
-                <p>Je kunt onmogelijk claimen dat je in Hamburg bent geweest als je de haven niet vanaf het water hebt ervaren! We stappen aan boord bij de beroemde en levendige Landungsbrücken en varen direct het industriële hart van de stad in. We glijden langs torenhoge kranen, gigantische containerschepen en ruige droogdokken waar kolossale schepen worden gerepareerd.</p>
-                <p>De schaal van de logistiek is hier werkelijk overweldigend. Let goed op de anekdotes van de kapitein over de boordradio, ze delen vaak geweldige verhalen vol droge Hamburgse humor (als je het plaatselijke dialect kunt ontcijferen). Belangrijke tip: neem absoluut een goed jasje mee! Zelfs op een zonnige aprildag kan de wind op het water onverwacht koud en guur zijn. Een hete kop koffie aan boord doet dan wonderen.</p>
+                <p>Maak je borst nat, want we gaan letterlijk de diepte in. Dit museum bevindt zich in een originele 'Röhrenbunker' onder de grond. Terwijl de rest van de stad boven je doorraast, ervaar je hier de beklemmende stilte van de schuilkelder.</p>
+                <p>Het is geen groot museum, maar de impact is enorm. Je ziet originele spullen van mensen die hier schuilden tijdens de zware bombardementen. Het brengt de geschiedenis van Hamburg op een manier tot leven die je in geen enkel geschiedenisboek vindt. Het herinnert ons eraan hoe veerkrachtig deze stad en haar bewoners zijn.</p>
             </div>
         </details>
-
         <div class="btn-group">
-            <a href="https://www.google.com/maps/search/?api=1&query=Landungsbrücken+Hamburg" target="_blank" class="maps-btn">📍 Open Maps</a>
-            <a href="https://www.hamburg-travel.com/see-explore/sightseeing/harbour-boat-trips/" target="_blank" class="website-btn">🌐 Tickets & Info</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Bunkermuseum+Hamburg+Wichernsweg" target="_blank" class="maps-btn">📍 Open Maps</a>
+            <a href="https://www.bunkermuseum.de/" target="_blank" class="website-btn">🌐 Website Museum</a>
         </div>
     </div>
 
-    <!-- DE VERRASSING -->
-    <div class="activity-card secret-card">
-        <span class="badge" style="background: var(--secret);">Zaterdag Avond - 21:00</span>
-        <h3>✨ De Verrassing</h3>
-        <div style="font-size: 3rem; text-align:center; margin: 20px 0;">🕵️‍♂️</div>
-        <p class="description">Geen kaarten, geen adressen. Alleen de tijd telt.</p>
-        
-        <details class="guide-details secret-details">
-            <summary class="guide-summary">🎙️ Tips van je Tourguide</summary>
-            <div class="guide-intel-content">
-                <p>Oké jongens, hier ga ik natuurlijk nog niet te veel over verklappen. Hamburg bij nacht is ronduit legendarisch, en speciaal voor deze avond heb ik iets in petto dat je niet snel zult vergeten. Zorg dat je uiterlijk om 20:45 verzameld bent, fris gedoucht en strak in je 'night out' outfit.</p>
-                <p>We duiken in een unieke sfeer die je eigenlijk alleen in en rond de beruchte wijk St. Pauli kunt vinden. Het wordt een perfecte mix van lokaal, lichtelijk onconventioneel, en gegarandeerd episch. Zorg dat je overdag voldoende water drinkt, laat je verwachtingen varen en maak je klaar voor een fantastische avond uit!</p>
-            </div>
-        </details>
-        <!-- Geen knoppen voor de verrassing! -->
-    </div>
-
-    <!-- FISCHMARKT -->
-    <div class="activity-card">
-        <span class="badge">Zondag - 06:00</span>
-        <h3>Fischmarkt & Schanze</h3>
-        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.945,53.543,9.955,53.548&layer=mapnik&marker=53.5451,9.9515"></iframe>
-        <p class="description">De legendarische zondagochtend traditie. Na de markt trekken we naar de hippe wijk Schanze voor de afsluiting.</p>
-        
+    <!-- VRIJDAG: ST. NIKOLAI -->
+    <div class="activity-card history-card">
+        <span class="badge">Vrijdag - 15:30</span>
+        <h3>Mahnmal St. Nikolai</h3>
+        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.985,53.544,9.995,53.550&layer=mapnik&marker=53.5475,9.9906"></iframe>
+        <p class="description">De zwartgeblakerde kerktoren als monument, inclusief glazen lift naar 76m hoogte.</p>
         <details class="guide-details">
             <summary class="guide-summary">🎙️ Tips van je Tourguide</summary>
             <div class="guide-intel-content">
-                <p>De vroege vogel vangt de lekkerste vis! De St. Pauli Fischmarkt is veel meer dan alleen een plek waar goederen van hand tot hand gaan; het is een historisch instituut. Zelfs als je nog half slaapt, wekt de bruisende sfeer je direct. Je hoort de beroemde marktlui (de 'Marktschreier') de longen uit hun lijf brullen om alles van palmbomen tot verse aal aan de man te brengen. Binnen in de historische visafslaghal staat vaak al rond 06:30 een live rockband te spelen voor een deinende menigte.</p>
-                <p>Mijn ultieme remedie voor een (waarschijnlijk) ietwat korte zaterdagnacht? Een oer-Duitse 'Fischbrötchen' met Bismarck-haring en een flinke beker zwarte koffie starend over de Elbe. Zodra we wakker zijn, slenteren we door naar het Schanzenviertel. Dit is dé hippe, alternatieve wijk van Hamburg. Hier vinden we de beste vintage boetiekjes, rauwe street-art en fantastische koffietentjes om onze indrukwekkende trip in alle rust en stijl af te ronden.</p>
+                <p>Na de bunker in Hamm bezoeken we St. Nikolai. Waar we in de bunker zagen hoe mensen schuilden, zien we hier wat er overbleef van de stad. De ruïne is indrukwekkend en een beetje spookachtig.</p>
+                <p>We pakken de glazen lift naar het platform op 76 meter hoogte. Vanuit de toren kijken we neer op de heropgebouwde stad. Zo sluiten we de middag af met een weids uitzicht en een moment van reflectie, voordat we ons klaarmaken voor de gezelligheid van de zaterdag.</p>
             </div>
         </details>
-
         <div class="btn-group">
-            <a href="https://www.google.com/maps/search/?api=1&query=St.+Pauli+Fischmarkt" target="_blank" class="maps-btn">📍 Open Maps</a>
-            <a href="https://www.hamburg.com/sights/fischmarkt/" target="_blank" class="website-btn">🌐 Info Fischmarkt</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Mahnmal+St.+Nikolai+Hamburg" target="_blank" class="maps-btn">📍 Open Maps</a>
+            <a href="https://www.mahnmal-st-nikolai.de/" target="_blank" class="website-btn">🌐 Website St. Nikolai</a>
         </div>
+    </div>
+
+    <!-- ZATERDAG & ZONDAG (Kort) -->
+    <div class="activity-card">
+        <span class="badge">Rest van het weekend</span>
+        <h3>Haven & Fischmarkt</h3>
+        <p class="description">De zaterdagse havenrondvaart, de grote verrassing in St. Pauli en de zondagse afsluiting op de vismarkt.</p>
     </div>
 
 </div>
 
 <footer>
-    ⚓ Hamburg Tour 2026 | Goede reis! <br>
-    <small>Versie 11.0</small>
+    ⚓ Hamburg Tour 2026 | Versie 13.0
 </footer>
 
 </body>
