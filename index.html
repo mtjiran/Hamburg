@@ -9,242 +9,224 @@
             --water: #1a3a5a;
             --accent: #e74c3c;
             --hotel: #2ecc71;
-            --bg: #f4f7f6;
+            --secret: #9b59b6;
             --card: #ffffff;
+            --text: #1e293b;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             margin: 0;
-            color: #333;
-            line-height: 1.5;
+            color: var(--text);
+            line-height: 1.6;
+            
+            /* ACHTERGROND AFBEELDING INSTELLINGEN */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
+                              url('https://images.pexels.com/photos/17145797/pexels-photo-17145797.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Zorgt dat de foto blijft staan tijdens scrollen */
+            background-repeat: no-repeat;
         }
 
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1541414779316-956a5084c0d4?auto=format&fit=crop&q=80&w=1200');
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1541414779316-956a5084c0d4?auto=format&fit=crop&q=80&w=1200');
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
         }
 
-        .container { max-width: 900px; margin: -30px auto 40px; padding: 0 15px; }
+        .container { max-width: 850px; margin: -30px auto 40px; padding: 0 20px; }
 
-        /* De Reis Slinger */
-        .timeline { position: relative; padding: 20px 0; }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            width: 4px;
-            height: 100%;
-            background: #d1d8e0;
-            transform: translateX(-50%);
-            z-index: 0;
+        /* Programma Overzicht */
+        .overview-card {
+            background: var(--water);
+            color: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3); /* Schaduw iets aangezet */
         }
 
-        .tour-stop {
-            position: relative;
-            width: 44%;
-            margin-bottom: 50px;
+        .overview-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .overview-table td { padding: 10px 5px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+        .time { font-weight: bold; color: #a5f3fc; width: 100px; }
+
+        /* Kaart styling */
+        .mini-map {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+
+        /* Activiteit Kaarten */
+        .activity-card {
             background: var(--card);
+            border-radius: 24px;
             padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            z-index: 1;
-            transition: transform 0.2s;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 25px -3px rgba(0,0,0,0.1); /* Schaduw iets aangezet */
+            border-top: 6px solid var(--accent);
         }
 
-        .tour-stop:hover { transform: translateY(-5px); }
+        .hotel-card { border-top-color: var(--hotel); }
+        .secret-card { border-top-color: var(--secret); background: #faf5ff; border: 2px dashed var(--secret); }
 
-        .tour-stop:nth-child(odd) { float: left; border-right: 6px solid var(--accent); }
-        .tour-stop:nth-child(even) { float: right; border-left: 6px solid var(--accent); margin-top: 40px; }
-
-        .tour-stop::after {
-            content: '⚓';
-            position: absolute;
-            top: 25px;
-            width: 30px;
-            height: 30px;
-            background: white;
-            border: 3px solid var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            z-index: 2;
+        .badge {
+            background: var(--water);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: inline-block;
         }
 
-        .tour-stop:nth-child(odd)::after { right: -65px; }
-        .tour-stop:nth-child(even)::after { left: -65px; }
+        .details-list { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9rem; }
+        .details-list li { margin-bottom: 8px; display: flex; align-items: center; }
+        .details-list li span { margin-right: 10px; opacity: 0.7; }
 
-        .clearfix { clear: both; }
+        h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--water); }
+        .description { font-size: 0.95rem; color: #475569; margin-bottom: 15px; }
 
-        .day-badge { 
-            background: var(--water); color: white; 
-            padding: 4px 12px; border-radius: 20px; 
-            font-size: 0.75rem; font-weight: bold;
-            display: inline-block; margin-bottom: 10px;
-        }
-
-        .guide-note {
-            background: #fff9e6;
-            border-left: 4px solid #f1c40f;
-            padding: 12px;
-            margin-top: 15px;
-            font-style: italic;
+        .guide-intel {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
             font-size: 0.9rem;
-            border-radius: 0 8px 8px 0;
+            border-left: 4px solid #64748b;
         }
 
-        .nav-btn {
+        .guide-intel strong { display: block; font-size: 0.7rem; color: #64748b; margin-bottom: 4px; text-transform: uppercase; }
+
+        .maps-btn {
             display: inline-flex;
             align-items: center;
-            background: #eef2f7;
-            color: var(--water);
+            background: #4285F4;
+            color: white;
             text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
             font-size: 0.85rem;
-            margin-top: 15px;
-            border: 1px solid #d1d8e0;
         }
 
-        .nav-btn:hover { background: var(--water); color: white; }
-
-        @media (max-width: 768px) {
-            .timeline::before { left: 20px; }
-            .tour-stop { width: 85%; float: right !important; margin-left: 40px; margin-top: 20px !important; }
-            .tour-stop::after { left: -38px !important; }
-        }
+        footer { text-align: center; padding: 40px; color: #1e293b; font-size: 0.8rem; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="hero">
-    <h1>⚓ Moin, Hamburgers!</h1>
-    <p>9 t/m 12 april 2026 | Jullie Interactieve Tourguide</p>
+    <h1>⚓ Hamburg Tour 2026</h1>
+    <p>9 t/m 12 april | Programma & Guide</p>
 </div>
 
 <div class="container">
 
-    <div class="timeline">
-
-        <!-- HOMEBASE -->
-        <div class="tour-stop" style="border-color: var(--hotel);">
-            <span class="day-badge" style="background: var(--hotel);">HOMEBASE</span>
-            <h3>NYX Hotel Hamburg</h3>
-            <p><strong>Adres:</strong> Frankenstraße 16<br>
-            Dit is onze uitvalsbasis. Een strak hotel in 'Hammerbrooklyn'. Alles is hiervandaan goed bereikbaar.</p>
-            <div class="guide-note">
-                "Gids-tip: Jullie ontbijt is inbegrepen! Neem een stevig maal, want we gaan veel lopen."
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=NYX+Hotel+Hamburg+Frankenstrasse+16" target="_blank" class="nav-btn">📍 Navigeer naar Hotel</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <!-- STOP 1 -->
-        <div class="tour-stop">
-            <span class="day-badge">DONDERDAG 17:00</span>
-            <h3>Speicherstadt</h3>
-            <p>We dwalen door het grootste pakhuizencomplex ter wereld. Let op de rode bakstenen en de vele bruggetjes.</p>
-            <div class="guide-note">
-                "Kijk uit naar de 'Wasserschloss' — het meest gefotografeerde gebouw van Hamburg. Hier zie je pas echt hoe de stad op het water is gebouwd."
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Speicherstadt+Hamburg" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <!-- STOP 2 -->
-        <div class="tour-stop">
-            <span class="day-badge">DONDERDAG 18:00</span>
-            <h3>Elbphilharmonie</h3>
-            <p>De glazen golf van Hamburg. We gaan naar de 'Plaza' voor een waanzinnig uitzicht over de haven en de stad.</p>
-            <div class="guide-note">
-                "Let op de wind daarboven! Het kan flink waaien op het terras, maar het panorama is de beste introductie van de stad die je kunt krijgen."
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Elbphilharmonie+Plaza" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <!-- STOP 3 -->
-        <div class="tour-stop">
-            <span class="day-badge">VRIJDAG 09:30</span>
-            <h3>Altstadt & Rathaus</h3>
-            <p>Het politieke hart. We bekijken het imposante stadhuis en lopen daarna langs de luxe winkels aan de Jungfernstieg.</p>
-            <div class="guide-note">
-                "Drink een kop koffie aan de Binnenalster. Het water in het midden van de stad geeft Hamburg die unieke, statige sfeer."
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Hamburger+Rathaus" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <!-- STOP 4 -->
-        <div class="tour-stop">
-            <span class="day-badge">VRIJDAG 15:30</span>
-            <h3>Bunkermuseum Hamm</h3>
-            <p>Een indrukwekkend bezoek aan een originele schuilbunker onder de grond. Tastbare WOII geschiedenis.</p>
-            <div class="guide-note">
-                "Dit museum wordt gerund door vrijwilligers. Het is klein, maar de verhalen over de bombardementen komen hier heel hard binnen."
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Bunkermuseum+Hamm+Wichernsweg+16" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <!-- STOP 5 -->
-        <div class="tour-stop">
-            <span class="day-badge">ZATERDAG 10:30</span>
-            <h3>Havenrondvaart</h3>
-            <p>Geen Hamburg trip zonder boottocht. We varen langs de enorme containerterminals en de historische kades.</p>
-            <div class="guide-note">
-                "Probeer een 'Barkasse' te nemen (de kleinere boten). Die kunnen door de smalle kanalen van de Speicherstadt varen als het getij goed is!"
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Landungsbrücken+Hamburg" target="_blank" class="nav-btn">📍 Navigeer naar Haven</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <!-- STOP 6 -->
-        <div class="tour-stop">
-            <span class="day-badge">ZATERDAG 21:30</span>
-            <h3>De Verrassing</h3>
-            <p>Een uur vol spektakel op de Reeperbahn. Spannend, uniek en typisch St. Pauli.</p>
-            <div class="guide-note">
-                "Ik verklap niks, maar zorg dat je op tijd bent voor de deur. Na afloop duiken we het nachtleven van de Kiez in!"
-            </div>
-            <!-- Geen kaart/navigatie voor de verrassing om het geheim te houden -->
-        </div>
-
-        <div class="clearfix"></div>
-
-        <!-- STOP 7 -->
-        <div class="tour-stop">
-            <span class="day-badge">ZONDAG 06:00</span>
-            <h3>Fischmarkt</h3>
-            <p>De legendarische zondagochtend markt. Marktlui die vis naar je schreeuwen en live rockmuziek in de vishal.</p>
-            <div class="guide-note">
-                "Het is vroeg, maar de sfeer is onvergetelijk. Koop een fruitmand of een broodje paling en geniet van de chaos."
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=St.+Pauli+Fischmarkt" target="_blank" class="nav-btn">📍 Navigeer naar Markt</a>
-        </div>
-
-        <div class="clearfix"></div>
+    <div class="overview-card">
+        <h2 style="margin-top:0">📅 Planning</h2>
+        <table class="overview-table">
+            <tr><td class="time">Donderdag</td><td>Aankomst, Inchecken & Speicherstadt Tour (15:00 - 20:00)</td></tr>
+            <tr><td class="time">Vrijdag</td><td>Altstadt, Rathaus & Bunkermuseum (10:00 - 17:30)</td></tr>
+            <tr><td class="time">Zaterdag</td><td>Havenrondvaart (11:00) & <strong>De Verrassing (21:00)</strong></td></tr>
+            <tr><td class="time">Zondag</td><td>Fischmarkt (06:00) & Schanzenviertel (11:00)</td></tr>
+        </table>
     </div>
+
+    <div class="activity-card hotel-card">
+        <span class="badge" style="background: var(--hotel);">Homebase</span>
+        <h3>NYX Hotel Hamburg by Leonardo</h3>
+        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=10.018,53.544,10.028,53.548&layer=mapnik&marker=53.5461,10.0232"></iframe>
+        
+        <p class="description">Jullie verblijven in het levendige Hammerbrook district. Een urban-art hotel met alle luxe die nodig is voor deze trip.</p>
+        
+        <ul class="details-list">
+            <li><span>📍</span> Frankenstraße 16, 20097 Hamburg</li>
+            <li><span>📞</span> +49 40 605 338 600</li>
+            <li><span>📧</span> info.hamburg@nyx-hotels.com</li>
+            <li><span>🕒</span> Check-in: vanaf 15:00 | Check-out: tot 12:00</li>
+            <li><span>🥐</span> Ontbijt: Ma-Vr 06:30-10:30 | Za-Zo 07:00-11:00</li>
+            <li><span>📶</span> WiFi: NYX_Guest (geen wachtwoord nodig)</li>
+        </ul>
+
+        <div class="guide-intel">
+            <strong>GIDS-INSIGHT:</strong>
+            "Mochten jullie eerder aankomen, de bagage kan veilig in de 'Lockers' bij de receptie. Drink een eerste biertje in de bar; de sfeer hier zet direct de juiste toon."
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=NYX+Hotel+Hamburg+Frankenstraße+16" target="_blank" class="maps-btn">📍 Navigeer naar Hotel</a>
+    </div>
+
+    <div class="activity-card">
+        <span class="badge">Donderdag - 16:00</span>
+        <h3>Speicherstadt & Elphi</h3>
+        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.980,53.538,9.995,53.546&layer=mapnik&marker=53.5408,9.9842"></iframe>
+        <p class="description">Verkenning van het UNESCO-werelderfgoed en een bezoek aan de Plaza van de Elbphilharmonie voor een uitzicht over de hele haven.</p>
+        <div class="guide-intel">
+            <strong>GIDS-INSIGHT:</strong>
+            "De roltrap (The Tube) duurt exact 2,5 minuut. Een perfect moment voor een groepsfoto."
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Elbphilharmonie+Hamburg" target="_blank" class="maps-btn">📍 Open Maps</a>
+    </div>
+
+    <div class="activity-card">
+        <span class="badge">Vrijdag - 10:30</span>
+        <h3>Altstadt & Historie</h3>
+        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.988,53.548,10.005,53.555&layer=mapnik&marker=53.5502,9.9922"></iframe>
+        <p class="description">Een wandeling langs het indrukwekkende Rathaus en een bezoek aan het Bunkermuseum in Hamm voor een diepe duik in de geschiedenis.</p>
+        <div class="guide-intel">
+            <strong>GIDS-INSIGHT:</strong>
+            "Tussen de middag stoppen we bij de Alsterarkaden voor een lunch aan het water. Heel sfeervol."
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Hamburger+Rathaus" target="_blank" class="maps-btn">📍 Open Maps</a>
+    </div>
+
+    <div class="activity-card">
+        <span class="badge">Zaterdag - 11:00</span>
+        <h3>Havenrondvaart</h3>
+        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.965,53.542,9.975,53.548&layer=mapnik&marker=53.5458,9.9696"></iframe>
+        <p class="description">De ziel van Hamburg vanaf het water. We varen langs dokken, kranen en gigantische zeeschepen.</p>
+        <div class="guide-intel">
+            <strong>GIDS-INSIGHT:</strong>
+            "Neem een jasje mee, op het water kan het zelfs in april flink waaien."
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Landungsbrücken+Hamburg" target="_blank" class="maps-btn">📍 Open Maps</a>
+    </div>
+
+    <div class="activity-card secret-card">
+        <span class="badge" style="background: var(--secret);">Zaterdag Avond - 21:00</span>
+        <h3>✨ De Verrassing</h3>
+        <div style="font-size: 3rem; text-align:center; margin: 20px 0;">🕵️‍♂️</div>
+        <p class="description">Geen kaarten, geen adressen. Alleen de tijd telt.</p>
+        <div class="guide-intel" style="border-left-color: var(--secret); background: #f3e8ff;">
+            <strong>GIDS-INSIGHT:</strong>
+            "Zorg dat je uiterlijk 20:45 in de buurt bent. Hint: een sfeer die je alleen in St. Pauli vindt. Dresscode: 'Night out' ready."
+        </div>
+    </div>
+
+    <div class="activity-card">
+        <span class="badge">Zondag - 06:00</span>
+        <h3>Fischmarkt & Schanze</h3>
+        <iframe class="mini-map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.945,53.543,9.955,53.548&layer=mapnik&marker=53.5451,9.9515"></iframe>
+        <p class="description">De legendarische zondagochtend traditie. Na de markt trekken we naar de hippe wijk Schanze voor de afsluiting.</p>
+        <div class="guide-intel">
+            <strong>GIDS-INSIGHT:</strong>
+            "In de vishal is er vaak live muziek. Een Fischbrötchen met een kop koffie is het beste medicijn tegen een korte nacht."
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=St.+Pauli+Fischmarkt" target="_blank" class="maps-btn">📍 Open Maps</a>
+    </div>
+
 </div>
 
-<footer style="text-align: center; padding: 40px; color: #888; font-size: 0.9rem;">
-    ⚓ Veel plezier, vieren! <br> 
-    <small>Versie 2.0 - Bye Bye 'pb' parameter.</small>
+<footer>
+    ⚓ Hamburg Tour 2026 | Goede reis! <br>
+    <small>Versie 11.0</small>
 </footer>
 
 </body>
