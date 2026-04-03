@@ -3,235 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamburg Reisoverzicht 2026</title>
+    <title>Hamburg 2026 | De Ultieme Tourguide</title>
     <style>
         :root {
-            --primary: #2c3e50;
+            --water: #1a3a5a;
             --accent: #e74c3c;
+            --hotel: #2ecc71;
             --bg: #f4f7f6;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --card: #ffffff;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
-            color: var(--primary);
             margin: 0;
-            padding: 10px;
-            line-height: 1.4;
+            color: #333;
+            line-height: 1.5;
         }
 
-        .container { max-width: 800px; margin: 0 auto; }
-
-        header {
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1541414779316-956a5084c0d4?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
             text-align: center;
-            padding: 20px 10px;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 12px;
-            margin-bottom: 15px;
+            padding: 60px 20px;
         }
 
-        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 5px; font-size: 1.3rem; margin-top: 0; }
-        h3 { font-size: 1.1rem; margin: 20px 0 10px 0; color: var(--primary); background: #eee; padding: 5px 10px; border-radius: 5px; }
+        .container { max-width: 900px; margin: -30px auto 40px; padding: 0 15px; }
 
-        .card {
-            background: var(--white);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        .item { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; }
-        .item:last-child { border-bottom: none; }
-
-        .time { font-weight: bold; color: var(--accent); width: 55px; display: inline-block; }
-        .details { font-size: 0.9rem; color: #555; margin-top: 5px; }
+        /* De Reis Slinger */
+        .timeline { position: relative; padding: 20px 0; }
         
-        .map-toggle-btn {
-            background: #f8f9fa;
-            border: 1px solid #ddd;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-top: 8px;
-            display: inline-block;
-            color: var(--primary);
-            font-weight: bold;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #d1d8e0;
+            transform: translateX(-50%);
+            z-index: 0;
         }
 
-        .map-wrapper {
-            display: none;
-            margin-top: 10px;
-            height: 300px;
-            width: 100%;
+        .tour-stop {
+            position: relative;
+            width: 44%;
+            margin-bottom: 50px;
+            background: var(--card);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            z-index: 1;
+            transition: transform 0.2s;
+        }
+
+        .tour-stop:hover { transform: translateY(-5px); }
+
+        .tour-stop:nth-child(odd) { float: left; border-right: 6px solid var(--accent); }
+        .tour-stop:nth-child(even) { float: right; border-left: 6px solid var(--accent); margin-top: 40px; }
+
+        .tour-stop::after {
+            content: '⚓';
+            position: absolute;
+            top: 25px;
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        .tour-stop:nth-child(odd)::after { right: -65px; }
+        .tour-stop:nth-child(even)::after { left: -65px; }
+
+        .clearfix { clear: both; }
+
+        .day-badge { 
+            background: var(--water); color: white; 
+            padding: 4px 12px; border-radius: 20px; 
+            font-size: 0.75rem; font-weight: bold;
+            display: inline-block; margin-bottom: 10px;
+        }
+
+        .guide-note {
+            background: #fff9e6;
+            border-left: 4px solid #f1c40f;
+            padding: 12px;
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #eef2f7;
+            color: var(--water);
+            text-decoration: none;
+            padding: 8px 15px;
             border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #ddd;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            border: 1px solid #d1d8e0;
         }
 
-        iframe { width: 100%; height: 100%; border: 0; }
+        .nav-btn:hover { background: var(--water); color: white; }
 
-        table { width: 100%; font-size: 0.9rem; border-collapse: collapse; }
-        td { padding: 5px 0; border-bottom: 1px solid #eee; }
-        .label { font-weight: bold; width: 120px; }
-
-        .badge { background: #e74c3c; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .tour-stop { width: 85%; float: right !important; margin-left: 40px; margin-top: 20px !important; }
+            .tour-stop::after { left: -38px !important; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Hamburg Reisoverzicht ⚓</h1>
-        <p>9 t/m 12 april 2026 | 4 Volwassenen</p>
-    </header>
-
-    <!-- HOTEL SECTION -->
-    <section class="card">
-        <h2>🏨 Hotel Gegevens</h2>
-        <table>
-            <tr><td class="label">Hotel</td><td>NYX Hotel Hamburg by Leonardo Hotels</td></tr>
-            <tr><td class="label">Adres</td><td>Frankenstraße 16, 20097 Hamburg</td></tr>
-            <tr><td class="label">Telefoon</td><td>+49 40 1821230</td></tr>
-            <tr><td class="label">Boeking</td><td>****</td></tr>
-            <tr><td class="label">Pincode</td><td>****</td></tr>
-            <tr><td class="label">Kamers</td><td>2x Comfort Tweepersoonskamer (Twin)</td></tr>
-            <tr><td class="label">Check-in</td><td>Donderdag 15:00-23:30</td></tr>
-            <tr><td class="label">Check-out</td><td>Zondag tot 12:00</td></tr>
-            <tr><td class="label">Ontbijt</td><td>Inbegrepen ✅</td></tr>
-        </table>
-        <button class="map-toggle-btn" onclick="toggleMap('map-hotel')">📍 Toon Hotel op Kaart</button>
-        <div id="map-hotel" class="map-wrapper">
-            <iframe src="https://www.google.com/maps?q=NYX+Hotel+Hamburg+Frankenstrasse+16&output=embed"></iframe>
-        </div>
-    </section>
-
-    <!-- PROGRAMMA PER DAG -->
-    <section class="card">
-        <h2>📅 Dagprogramma</h2>
-
-        <h3>Donderdag 9 april - Aankomst</h3>
-        <div class="item">
-            <span class="time">15:00</span> <strong>Inchecken hotel</strong>
-            <div class="details">Buffer: 30 min.</div>
-        </div>
-        <div class="item">
-            <span class="time">17:00</span> <strong>Speicherstadt wandeling</strong>
-            <div class="details">Iconische pakhuizen en kanalen.</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-speicher')">📍 Kaart</button>
-            <div id="map-speicher" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=Speicherstadt+Hamburg&output=embed"></iframe>
-            </div>
-        </div>
-        <div class="item">
-            <span class="time">18:00</span> <strong>Elbphilharmonie Plaza</strong>
-            <div class="details">Uitzichtpunt (gratis).</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-elphi')">📍 Kaart</button>
-            <div id="map-elphi" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=Elbphilharmonie+Plaza&output=embed"></iframe>
-            </div>
-        </div>
-        <div class="item">
-            <span class="time">19:00</span> <strong>Diner HafenCity</strong>
-        </div>
-
-        <h3>Vrijdag 10 april - Stad & Geschiedenis</h3>
-        <div class="item">
-            <span class="time">09:30</span> <strong>Altstadt & Rathaus</strong>
-            <div class="details">Rathaus, Binnenalster, Jungfernstieg.</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-rathaus')">📍 Kaart</button>
-            <div id="map-rathaus" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=Hamburger+Rathaus&output=embed"></iframe>
-            </div>
-        </div>
-        <div class="item">
-            <span class="time">13:30</span> <strong>St. Nikolai Memorial</strong>
-            <div class="details">Ruïne & Museum over de luchtoorlog.</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-nikolai')">📍 Kaart</button>
-            <div id="map-nikolai" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=St.+Nikolai+Memorial+Hamburg&output=embed"></iframe>
-            </div>
-        </div>
-        <div class="item">
-            <span class="time">15:30</span> <strong>Bunkermuseum Hamm</strong>
-            <div class="details">Wichernsweg 16. <span class="badge">Check openingstijden!</span></div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-bunker')">📍 Kaart</button>
-            <div id="map-bunker" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=Bunkermuseum+Hamm+Wichernsweg+16&output=embed"></iframe>
-            </div>
-        </div>
-
-        <h3>Zaterdag 11 april - Haven & Reeperbahn</h3>
-        <div class="item">
-            <span class="time">10:30</span> <strong>Havenrondvaart</strong>
-            <div class="details">Start Landungsbrücken. 15 min vooraf aanwezig.</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-haven')">📍 Kaart</button>
-            <div id="map-haven" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=Landungsbrücken+Hamburg&output=embed"></iframe>
-            </div>
-        </div>
-        <div class="item">
-            <span class="time">19:30</span> <strong>Diner St. Pauli / Reeperbahn</strong>
-        </div>
-        <div class="item">
-            <span class="time">21:30</span> <strong>Verrassing <span class="badge">FSK18</span></strong>
-            <div class="details">Große Freiheit 27. Duur ca. 1 uur.</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-surp')">📍 Kaart</button>
-            <div id="map-surp" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=Grosse+Freiheit+27+Hamburg&output=embed"></iframe>
-            </div>
-        </div>
-
-        <h3>Zondag 12 april - Afsluiting</h3>
-        <div class="item">
-            <span class="time">06:00</span> <strong>Fischmarkt</strong>
-            <div class="details">April-okt tot 09:30. Ga vroeg!</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-fish')">📍 Kaart</button>
-            <div id="map-fish" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=St.+Pauli+Fischmarkt&output=embed"></iframe>
-            </div>
-        </div>
-        <div class="item">
-            <span class="time">10:30</span> <strong>Schanzenviertel</strong>
-            <div class="details">Koffie en street art wandeling.</div>
-            <button class="map-toggle-btn" onclick="toggleMap('map-schanze')">📍 Kaart</button>
-            <div id="map-schanze" class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=Sternschanze+Hamburg&output=embed"></iframe>
-            </div>
-        </div>
-        <div class="item">
-            <span class="time">12:00</span> <strong>Uitchecken & Vertrek</strong>
-        </div>
-    </section>
-
-    <!-- TICKETS & LINKS -->
-    <section class="card">
-        <h2>🎟️ Handige Links</h2>
-        <p style="font-size: 0.9rem;">
-            - <strong>Havenrondvaart:</strong> barkassen-meyer.de of abicht.de<br>
-            - <strong>St. Nikolai:</strong> mahnmal-st-nikolai.de<br>
-            - <strong>Bunkermuseum:</strong> bunkermuseum.de (Check de beperkte tijden!)<br>
-            - <strong>Fischmarkt:</strong> fischmarkt-hamburg.de
-        </p>
-    </section>
+<div class="hero">
+    <h1>⚓ Moin, Hamburgers!</h1>
+    <p>9 t/m 12 april 2026 | Jullie Interactieve Tourguide</p>
 </div>
 
-<script>
-    function toggleMap(id) {
-        const map = document.getElementById(id);
-        const isVisible = map.style.display === "block";
-        
-        // Sluit eerst alle kaarten (optioneel, voor overzicht)
-        document.querySelectorAll('.map-wrapper').forEach(el => el.style.display = 'none');
-        
-        // Toggle de gekozen kaart
-        map.style.display = isVisible ? "none" : "block";
-    }
-</script>
+<div class="container">
+
+    <div class="timeline">
+
+        <!-- HOMEBASE -->
+        <div class="tour-stop" style="border-color: var(--hotel);">
+            <span class="day-badge" style="background: var(--hotel);">HOMEBASE</span>
+            <h3>NYX Hotel Hamburg</h3>
+            <p><strong>Adres:</strong> Frankenstraße 16<br>
+            Dit is onze uitvalsbasis. Een strak hotel in 'Hammerbrooklyn'. Alles is hiervandaan goed bereikbaar.</p>
+            <div class="guide-note">
+                "Gids-tip: Jullie ontbijt is inbegrepen! Neem een stevig maal, want we gaan veel lopen."
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=NYX+Hotel+Hamburg+Frankenstrasse+16" target="_blank" class="nav-btn">📍 Navigeer naar Hotel</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- STOP 1 -->
+        <div class="tour-stop">
+            <span class="day-badge">DONDERDAG 17:00</span>
+            <h3>Speicherstadt</h3>
+            <p>We dwalen door het grootste pakhuizencomplex ter wereld. Let op de rode bakstenen en de vele bruggetjes.</p>
+            <div class="guide-note">
+                "Kijk uit naar de 'Wasserschloss' — het meest gefotografeerde gebouw van Hamburg. Hier zie je pas echt hoe de stad op het water is gebouwd."
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Speicherstadt+Hamburg" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- STOP 2 -->
+        <div class="tour-stop">
+            <span class="day-badge">DONDERDAG 18:00</span>
+            <h3>Elbphilharmonie</h3>
+            <p>De glazen golf van Hamburg. We gaan naar de 'Plaza' voor een waanzinnig uitzicht over de haven en de stad.</p>
+            <div class="guide-note">
+                "Let op de wind daarboven! Het kan flink waaien op het terras, maar het panorama is de beste introductie van de stad die je kunt krijgen."
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Elbphilharmonie+Plaza" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- STOP 3 -->
+        <div class="tour-stop">
+            <span class="day-badge">VRIJDAG 09:30</span>
+            <h3>Altstadt & Rathaus</h3>
+            <p>Het politieke hart. We bekijken het imposante stadhuis en lopen daarna langs de luxe winkels aan de Jungfernstieg.</p>
+            <div class="guide-note">
+                "Drink een kop koffie aan de Binnenalster. Het water in het midden van de stad geeft Hamburg die unieke, statige sfeer."
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hamburger+Rathaus" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- STOP 4 -->
+        <div class="tour-stop">
+            <span class="day-badge">VRIJDAG 15:30</span>
+            <h3>Bunkermuseum Hamm</h3>
+            <p>Een indrukwekkend bezoek aan een originele schuilbunker onder de grond. Tastbare WOII geschiedenis.</p>
+            <div class="guide-note">
+                "Dit museum wordt gerund door vrijwilligers. Het is klein, maar de verhalen over de bombardementen komen hier heel hard binnen."
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Bunkermuseum+Hamm+Wichernsweg+16" target="_blank" class="nav-btn">📍 Navigeer hierheen</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- STOP 5 -->
+        <div class="tour-stop">
+            <span class="day-badge">ZATERDAG 10:30</span>
+            <h3>Havenrondvaart</h3>
+            <p>Geen Hamburg trip zonder boottocht. We varen langs de enorme containerterminals en de historische kades.</p>
+            <div class="guide-note">
+                "Probeer een 'Barkasse' te nemen (de kleinere boten). Die kunnen door de smalle kanalen van de Speicherstadt varen als het getij goed is!"
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Landungsbrücken+Hamburg" target="_blank" class="nav-btn">📍 Navigeer naar Haven</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- STOP 6 -->
+        <div class="tour-stop">
+            <span class="day-badge">ZATERDAG 21:30</span>
+            <h3>De Verrassing</h3>
+            <p>Een uur vol spektakel op de Reeperbahn. Spannend, uniek en typisch St. Pauli.</p>
+            <div class="guide-note">
+                "Ik verklap niks, maar zorg dat je op tijd bent voor de deur. Na afloop duiken we het nachtleven van de Kiez in!"
+            </div>
+            <!-- Geen kaart/navigatie voor de verrassing om het geheim te houden -->
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- STOP 7 -->
+        <div class="tour-stop">
+            <span class="day-badge">ZONDAG 06:00</span>
+            <h3>Fischmarkt</h3>
+            <p>De legendarische zondagochtend markt. Marktlui die vis naar je schreeuwen en live rockmuziek in de vishal.</p>
+            <div class="guide-note">
+                "Het is vroeg, maar de sfeer is onvergetelijk. Koop een fruitmand of een broodje paling en geniet van de chaos."
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=St.+Pauli+Fischmarkt" target="_blank" class="nav-btn">📍 Navigeer naar Markt</a>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 40px; color: #888; font-size: 0.9rem;">
+    ⚓ Veel plezier, vieren! <br> 
+    <small>Versie 2.0 - Bye Bye 'pb' parameter.</small>
+</footer>
 
 </body>
 </html>
